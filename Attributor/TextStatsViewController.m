@@ -18,6 +18,11 @@
 
 @implementation TextStatsViewController
 
+-(void) viewDidLoad {
+    [super viewDidLoad];
+    self.textToAnalyze = [[NSAttributedString alloc] initWithString:@"test" attributes:NSForegroundColorAttributeName];
+    
+}
 -(void)setTextToAnalyze:(NSAttributedString *)textToAnalyze
 {
     textToAnalyze = textToAnalyze;
@@ -45,7 +50,7 @@
 -(NSAttributedString *)charactersWithAttribute:(NSString *)attributeName
 {
     NSMutableAttributedString *characters = [[NSMutableAttributedString alloc] init];
-    int index = 0;
+    unsigned int index = 0;
     while (index < [self.textToAnalyze length]) {
         NSRange range;
         id value = [self.textToAnalyze attribute:attributeName atIndex:index effectiveRange:&range];
