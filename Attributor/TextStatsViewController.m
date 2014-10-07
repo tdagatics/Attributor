@@ -20,7 +20,8 @@
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-    self.textToAnalyze = [[NSAttributedString alloc] initWithString:@"test" attributes:NSForegroundColorAttributeName];
+    self.textToAnalyze = [[NSAttributedString alloc] initWithString:@"test" attributes:@{ NSForegroundColorAttributeName : [UIColor greenColor], NSStrokeWidthAttributeName: @-3}];
+
     
 }
 -(void)setTextToAnalyze:(NSAttributedString *)textToAnalyze
@@ -41,8 +42,8 @@
 
 -(void)updateUI
 {
-    self.colorfulCharactersLabel.text = [NSString stringWithFormat:@"%d colorful characters", [[self charactersWithAttribute:NSForegroundColorAttributeName] length]];
-    self.outlinedCharactersLabel.text = [NSString stringWithFormat:@"%d colorful characters", [[self charactersWithAttribute:NSStrokeWidthAttributeName] length]];
+    self.colorfulCharactersLabel.text = [NSString stringWithFormat:@"%lu colorful characters", (unsigned long)[[self charactersWithAttribute:NSForegroundColorAttributeName] length]];
+    self.outlinedCharactersLabel.text = [NSString stringWithFormat:@"%lu colorful characters", (unsigned long)[[self charactersWithAttribute:NSStrokeWidthAttributeName] length]];
     
     
 }
@@ -50,7 +51,7 @@
 -(NSAttributedString *)charactersWithAttribute:(NSString *)attributeName
 {
     NSMutableAttributedString *characters = [[NSMutableAttributedString alloc] init];
-    unsigned int index = 0;
+    unsigned long index = 0;
     while (index < [self.textToAnalyze length]) {
         NSRange range;
         id value = [self.textToAnalyze attribute:attributeName atIndex:index effectiveRange:&range];
